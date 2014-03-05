@@ -62,10 +62,13 @@ public class TasksDatabaseHelper extends SQLiteOpenHelper {
         public static final String CHARACTERS = "characters";
     }
 
+    // relational table between projects and customers
     public interface OrdersColumns {
-
+        public static final String PROJECT_ID = "project_id";
+        public static final String CUSTOMER_ID = "customer_id";
     }
 
+    // only stored on server side
     public interface RemindersColumns {
         public static final String PROJECT_ID = "project_id";
         public static final String CUSTOMER_ID = "customer_id";
@@ -129,7 +132,9 @@ public class TasksDatabaseHelper extends SQLiteOpenHelper {
                 ContactsColumns.CHARACTERS + " TEXT");
 
         db.execSQL("CREATE TABLE " + Tables.ORDERS + " (" +
-                BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,");
+                BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                OrdersColumns.PROJECT_ID + " INTEGER," +
+                OrdersColumns.CUSTOMER_ID + " INTEGER");
 
         db.execSQL("CREATE TABLE " + Tables.REMINDERS + " (" +
                 BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
